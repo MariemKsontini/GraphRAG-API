@@ -24,6 +24,8 @@ This API provides knowledge retrieval and question-answering capabilities on PDF
 
 ## Overview
 
+![Uploading image.png…]()
+
 This FastAPI application allows users to:
 
 - **Upload PDFs via a URL**: The `/upload-pdf/` endpoint accepts a URL to an online PDF, processes it, and stores its content for retrieval.
