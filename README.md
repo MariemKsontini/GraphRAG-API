@@ -19,9 +19,6 @@ This API provides knowledge retrieval and question-answering capabilities on PDF
 - [Testing](#testing)
   - [Testing with a Large PDF](#testing-with-a-large-pdf)
 - [Error Handling and Edge Cases](#error-handling-and-edge-cases)
-- [Notes](#notes)
-- [Appendix](#appendix)
-  - [Sample `.env` File](#sample-env-file)
 
 ---
 
