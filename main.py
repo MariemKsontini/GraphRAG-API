@@ -15,7 +15,8 @@ import requests
 from dotenv import load_dotenv
 load_dotenv()
 
-
+GRAPHRAG_CONFIG_PATH = os.getenv('GRAPHRAG_CONFIG_PATH')
+GRAPHRAG_DATA_DIR = os.getenv('GRAPHRAG_DATA_DIR')
 
 embeddings = OpenAIEmbeddings()
 llm = ChatOpenAI(model='gpt-4o')
@@ -30,7 +31,7 @@ vector_store = LanceDB(
 app = FastAPI()
 
 def run_index_cli():
-    _index_cli(root=Path("."), config=Path("GRAPHRAG_CONFIG_PATH"))
+    _index_cli(root=Path("."), config=Path(GRAPHRAG_CONFIG_PATH))
 
 @app.post("/upload-pdf/")
 async def upload_pdf(url: str):
@@ -88,9 +89,9 @@ async def upload_pdf(url: str):
 def retrieve(query,doc_id: str = None):
     # _query_cli(SearchType.DRIFT, root=Path(), query="hello")
     context = []
-    graphragGlobal = run_global_search(Path("GRAPHRAG_CONFIG_PATH"), data_dir=Path('GRAPHRAG_DATA_DIR'),  root_dir=Path('.'), community_level=2, streaming=False, query=query, response_type="multiple paragraphs")
+    graphragGlobal = run_global_search(Path(GRAPHRAG_CONFIG_PATH), data_dir=Path(GRAPHRAG_DATA_DIR),  root_dir=Path('.'), community_level=2, streaming=False, query=query, response_type="multiple paragraphs")
     context.append(graphragGlobal[0][:100])
-    graphragLocal = run_local_search(Path("GRAPHRAG_CONFIG_PATH"), data_dir=Path('GRAPHRAG_DATA_DIR'),  root_dir=Path('.'), community_level=2, streaming=False, query=query, response_type="multiple paragraphs")
+    graphragLocal = run_local_search(Path(GRAPHRAG_CONFIG_PATH), data_dir=Path(GRAPHRAG_DATA_DIR),  root_dir=Path('.'), community_level=2, streaming=False, query=query, response_type="multiple paragraphs")
     context.append(graphragLocal[0][:100])
     if doc_id:
         retrieveRAG = vector_store.similarity_search_with_relevance_scores(
