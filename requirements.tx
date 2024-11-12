@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+graphrag
+pandas
+PyMuPDF
+langchain_community
+tiktoken
+langchain_openai
+openai
+langchain_text_splitters
+requests
+python-dotenv
+LanceDB
+frontend
+tools
+pytest
