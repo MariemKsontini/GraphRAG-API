@@ -34,7 +34,8 @@ def run_index_cli():
 
 @app.post("/upload-pdf/")
 async def upload_pdf(url: str):
-    # Ensure the ./input and ./static directories exist
+    # Ensure the ./docs ./input and ./static directories exist
+    os.makedirs('./docs', exist_ok=True)
     os.makedirs('./input', exist_ok=True)
     os.makedirs('./static', exist_ok=True)
     doc_id = str(uuid.uuid4())
